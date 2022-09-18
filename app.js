@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const https = require("https");
 app.use(bodyParser.urlencoded({ extended: true }));
+ 
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -43,8 +44,12 @@ app.post("/", (req, res) => {
   });
 });
 
-const port = process.env.PORT;
+let port = process.env.PORT;
 
-app.listen(port || 3000, () => {
+if(port == null || port == ""){
+  port = 3000;
+}
+
+app.listen(port , () => {
   console.log(`Server is running at 3000`);
 });
